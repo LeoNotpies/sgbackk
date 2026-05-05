@@ -28,8 +28,8 @@ const {
 } = require("./BackendUtils");
 
 const app = express();
-const Title = "StumbleCrowns";
-const PORT = process.env.PORT || 8080;
+const Title = "StumbleBack";
+const PORT = process.env.PORT || 10000;
 
 app.use(express.json());
 app.get('/version/get', (req, res) => {
@@ -140,7 +140,7 @@ app.post("/round/tournament/finish/v2", TournamentXController.finish);
 app.get("/api/v1/ping", async (req, res) => {
   res.status(200).send("OK");
 });
-app.post("/api/v1/userLoginExternal ", TournamentController.login);
+app.post("/api/v1/userLoginExternal", TournamentController.login);
 app.get("/api/v1/tournaments", TournamentController.getActive);
 
 app.get('/round/finish/:round', RoundController.finishRound);
@@ -165,11 +165,11 @@ app.get('/economy/luckyspin', (req, res) =>
 
 // Handle custom round finish for custom parties
 app.post('/round/customroundfinish/:country/:gameId/:userId', RoundController.finishCustomRound);
-app.post('//round/customroundfinish/:country/:gameId/:userId', RoundController.finishCustomRound);
+app.post('/round/customroundfinish/:country/:gameId/:userId', RoundController.finishCustomRound);
 
 app.use(errorControll);
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   const currentDate = new Date().toLocaleString().replace(",", " |");
   console.clear();
   Console.log(
